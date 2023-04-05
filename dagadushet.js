@@ -1,62 +1,165 @@
-const inputBox = document.querySelector('.input-box');
-const searchBtn = document.getElementById('searchBtn');
-const weather_img = document.querySelector('.weather-img');
-const temperature = document.querySelector('.temperature');
-const description = document.querySelector('.description');
-const humidity = document.getElementById('humidity');
-const wind_speed = document.getElementById('wind-speed');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-family: sans-serif;
+    background-size: cover;
 
-const location_not_found = document.querySelector('.location-not-found');
-
-const weather_body = document.querySelector('.weather-body');
-
-async function checkWeather(city){
-    const api_key = "3ee900460a39a83edafa409232fa83b8";
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}`;
-
-    const weather_data = await fetch(`${url}`).then(response => response.json());
+    overflow: hidden;
 
 
-    if(weather_data.cod === `404`){
-        location_not_found.style.display = "flex";
-        weather_body.style.display = "none";
-        console.log("error");
-        return;
-    }
 
-    console.log("run");
-    location_not_found.style.display = "none";
-    weather_body.style.display = "flex";
-    temperature.innerHTML = `${Math.round(weather_data.main.temp - 273.15)}°C`;
-    description.innerHTML = `${weather_data.weather[0].description}`;
+}
 
-    humidity.innerHTML = `${weather_data.main.humidity}%`;
-    wind_speed.innerHTML = `${weather_data.wind.speed}Km/H`;
+.container2 {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("as.jpg");
 
 
-    switch(weather_data.weather[0].main){
-        case 'Clouds':
-            weather_img.src = "cloud.png";
-            break;
-        case 'Clear':
-            weather_img.src = "clear.png";
-            break;
-        case 'Rain':
-            weather_img.src = "rain.png";
-            break;
-        case 'Mist':
-            weather_img.src = "mist.png";
-            break;
-        case 'Snow':
-            weather_img.src = "snow.png";
-            break;
 
-    }
-
-    console.log(weather_data);
 }
 
 
-searchBtn.addEventListener('click', ()=>{
-    checkWeather(inputBox.value);
-});
+
+
+.container {
+    width: 400px;
+    height: min-content;
+    background-color:hsl(180, 89%, 74%);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 30px;
+
+}
+
+.search-box {
+    width: 100%;
+    height: min-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-box input {
+    width: 84%;
+    font-size: 20px;
+    text-transform: capitalize;
+    color: #000;
+    background-color: #e6f5fb;
+    padding: 12px 16px;
+    border-radius: 14px;
+}
+
+.search-box input::placeholder {
+    color: #000;
+}
+
+.search-box button {
+    width: 46px;
+    height: 46px;
+    background-color: #e6f5fb;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.search-box button:hover {
+    color: #fff;
+    background-color: #ababab;
+}
+
+.weather-body {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-block: 20px;
+    display: none;
+}
+
+.weather-body img {
+    width: 60%;
+
+
+}
+
+.weather-box {
+    margin-block: 20px;
+    text-align: center;
+
+}
+
+.weather-box .temperature {
+    font-size: 40px;
+    font-weight: 800;
+    position: relative;
+}
+
+.weather-box .temperature sup {
+    font-size: 20px;
+    position: absolute;
+    font-weight: 600;
+}
+
+.weather-box .description {
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.weather-details {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.humidity,
+.wind {
+    display: flex;
+    align-items: center;
+}
+
+.humidity {
+    margin-left: 20px;
+}
+
+.wind {
+    margin-right: 20px;
+}
+
+.weather-details i {
+    font-size: 36px;
+}
+
+.weather-details .text {
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.text span {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.location-not-found {
+    margin-top: 20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.location-not-found h1 {
+    font-size: 20px;
+    color: #6b6b6b;
+    margin-block-end: 15px;
+}
+
+.location-not-found img {
+    width: 80%;
+}
